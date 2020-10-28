@@ -2,15 +2,15 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "moviepedia-app",
-    "host": "localhost",
+    "database": "MovieApp",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "moviepedia-app",
-    "host": "localhost",
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
