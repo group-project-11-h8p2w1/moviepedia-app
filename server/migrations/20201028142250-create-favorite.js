@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       MovieId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       UserId: {
