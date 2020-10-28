@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, ValidationError
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Favorite extends Model {
