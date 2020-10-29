@@ -12,6 +12,9 @@ function errorHandler (err, req, res, next) {
   } else if (err.name === "SequelizeUniqueConstraintError") {
     status = 400;
     msg = `Email is already taken!`;
+  } else if (err.message === "Request failed with status code 404") {
+    status = 404;
+    msg = `Movie not found!`;
   } else {
     status = err.status || 500;
     msg = err.msg || `Internal server error!`;
