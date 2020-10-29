@@ -2,7 +2,6 @@ const axios = require('axios')
 
 class MovieController {
   static getPopularMovie(req, res, next) {
-    console.log('masuk');
     axios({
       url: 'https://api.themoviedb.org/3/movie/popular',
       method: 'get',
@@ -11,7 +10,6 @@ class MovieController {
       }
     })
     .then(movies => {
-      console.log('masuk 2');
       let listMovie = movies.data.results.map(el =>{
         return {
           id: el.id,
