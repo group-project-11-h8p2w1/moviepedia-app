@@ -4,9 +4,11 @@ class FavoriteController {
 
   static async addFavMovie(req, res, next) {
     try {
-      const { MovieId } = req.body;
+      const { MovieId, title, poster_path } = req.body;
       const UserId = +req.userLoggedIn.id;
       let favObj = {
+        title,
+        poster_path,
         UserId,
         MovieId
       };

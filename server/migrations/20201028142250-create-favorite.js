@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      poster_path: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       MovieId: {
         allowNull: false,
         type: Sequelize.INTEGER
