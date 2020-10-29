@@ -2,6 +2,7 @@ const axios = require('axios')
 
 class MovieController {
   static getPopularMovie(req, res, next) {
+    let listMovie
     axios({
       url: 'https://api.themoviedb.org/3/movie/popular',
       method: 'get',
@@ -10,14 +11,36 @@ class MovieController {
       }
     })
     .then(movies => {
-      let listMovie = movies.data.results.map(el =>{
+      listMovie = movies.data.results.map(el =>{
         return {
           id: el.id,
           title: el.title,
           poster_path: 'https://image.tmdb.org/t/p/w342/' + el.poster_path
         }
       })
-      res.status(200).json({ movies: listMovie})
+      return axios({
+        url: 'https://newsapi.org/v2/everything',
+        method: 'get',
+        params: {
+          apiKey: '01e5c7cdc17647f7a9cba22b48469591',
+          q: 'movie'
+        }
+      })
+    })
+    .then(result => {
+      let news = result.data.articles
+      let selectedNews = news[Math.floor(Math.random() * news.length)]
+      let filteredNews = {
+        source: selectedNews.source.name,
+        author: selectedNews.author,
+        title: selectedNews.title,
+        description: selectedNews.description
+      }
+      let selectedMovie = []
+      for (let i = 0; i < 10; i++) {
+        selectedMovie.push(listMovie[Math.floor(Math.random() * listMovie.length)])
+      }
+      res.status(200).json({ news: filteredNews, movies: selectedMovie})
     })
     .catch(err => {
       next(err)
@@ -26,7 +49,6 @@ class MovieController {
 
   static getOneMovie(req, res, next) {
     const id = req.params.id
-    // const id = 465086
     axios({
       url: `https://api.themoviedb.org/3/movie/${id}`,
       method: 'get',
@@ -35,7 +57,6 @@ class MovieController {
       }
     })
     .then(result => {
-      // console.log(ressult.data);
       const { id, title, release_date, overview, vote_average, genres, poster_path  } = result.data
       const movie = {
         id,
@@ -100,7 +121,7 @@ class MovieController {
   }
 
   static searchMovie(req, res, next) {
-    const query = req.query.query
+    const query = req.query.query || 'a'
     axios({
       url: `https://api.themoviedb.org/3/search/movie`,
       method: 'get',
