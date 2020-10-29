@@ -3,10 +3,13 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const router = require('./routers/router');
+const cors = require('cors')
 
 // Error Handler
 const errorHandler = require("./middlewares/errorHandler");
 
+//cors
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 

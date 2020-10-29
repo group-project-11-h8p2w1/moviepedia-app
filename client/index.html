@@ -1,0 +1,84 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
+    crossorigin="anonymous">
+    <title>Movie App</title>
+</head>
+<body>
+
+    <!-- landing navbar -->
+    <section id="landing_navbar"> 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Movie Apps</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="login">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="" onclick="loginPage()">Login<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" onclick="registerPage()">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+
+
+    <!-- login form idnya landing -->
+    <section class="container" id="login">
+        <div class="row justify-content-center mt-5">
+            <div class="col-4">
+                <img src="https://banner2.cleanpng.com/20180401/tze/kisspng-cinema-film-movie-theatre-5ac06862efe2e8.5141006915225590749826.jpg" width="20%" height="20%">
+                <form onsubmit="login(event)">
+                    <h3>Log In</h3>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" autocomplete="email">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- register form idnya register -->
+    <section class="container" id="register">
+        <div class="row justify-content-center mt-5">
+            <div class="col-4">
+                <form onsubmit="register(event)">
+                    <h3>Create an Account</h3>
+                    <div class="form-group">
+                      <label for="email_register">Email</label>
+                      <input type="email" class="form-control" id="email_register" aria-describedby="emailHelp" autocomplete="email">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="password_register">Password</label>
+                      <input type="password" class="form-control" id="password_register" autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
