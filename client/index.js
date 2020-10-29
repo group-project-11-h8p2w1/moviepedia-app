@@ -20,6 +20,7 @@ function onSignIn(googleUser) {
     $('#content_navbar').show()
     $('#login_page').hide()
     $('#landing_navbar').hide()
+    $('#comingSoonMovie').hide()
 
     //ngosongin isi form after login
     $('#email_login').val('')
@@ -60,6 +61,9 @@ function loginPage(){
     $('#allMovies').hide()
     $('#homepage_navbar').hide()
     $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#selectedMovie').hide()
+    $('#comingSoonMovie').hide()
 }
 
 function login(e) {
@@ -103,6 +107,9 @@ function registerPage(){
     $('#allMovies').hide()
     $('#homepage_navbar').hide()
     $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#selectedMovie').hide()
+    $('#comingSoonMovie').hide()
 }
 
 
@@ -136,6 +143,9 @@ function movies() {
     $('#allMovies').show()
     $('#homepage_navbar').show()
     $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#selectedMovie').hide()
+    $('#comingSoonMovie').hide()
 }
 
 function viewMovies(){
@@ -196,6 +206,8 @@ function selectMovie(id,e){
     $('#homepage_navbar').show()
     $('#selectedMovie').show()
     $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#comingSoonMovie').hide()
 }
 
 function oneMovie(id,e) {
@@ -263,6 +275,8 @@ function favourite(){
     $('#homepage_navbar').show()
     $('#selectedMovie').hide()
     $('#favourites').show()
+    $('#searchMovies').hide()
+    $('#comingSoonMovie').hide()
 
     viewFavourites()
 }
@@ -280,6 +294,7 @@ function viewFavourites(){
     })
     .done(response => { 
         // console.log(response)
+        $('#fav-movies').empty()
         response.forEach(element => {
           $('#fav-movies').append(`
           <div class="movie-card">
@@ -288,9 +303,10 @@ function viewFavourites(){
             </div>
             <div class="movie-content">
               <div class="movie-content-header">
-                <a href="#" onclick="selectMovie(${element.id}, event)">
+                <a href="#" onclick="selectMovie(${element.MovieId}, event)">
                   <h3 class="movie-title">${element.title}</h3>
                 </a>
+                <h3 style="#" onclick="deleteFavoriteMovie(${element.id})">x</h3>
               </div>
             </div>
           </div>
@@ -302,23 +318,126 @@ function viewFavourites(){
     })
 }
 
-function search(e) {
-  const access_token = localStorage.getItem('access_token')
+function viewSearch (){
+    $('#login_page').hide()
+    $('#landing_navbar').hide()
+    $('#register').hide()
+    $('#allMovies').hide()
+    $('#homepage_navbar').show()
+    $('#selectedMovie').hide()
+    $('#favourites').hide()
+    $('#searchMovies').show()
+    $('#comingSoonMovie').hide()
+}
 
-  e.preventDefault()
+function search(e) {
+
+    viewSearch()
+
+    const access_token = localStorage.getItem('access_token')
+    
+    e.preventDefault()
     const search_index = $('#search-index').val()
     
-  $.ajax({
-      method: 'GET',
-      url: `${SERVER}/movie/search?query=${search_index}`,
-      headers: {
-          access_token: access_token
-      }
-  })
-  .done(response => {
-    console.log(response)
-})
-.fail(err => {
-    console.log(err)
-})
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER}/movie/search?query=${search_index}`,
+        headers: {
+            access_token: access_token
+        }
+    })
+    .done(response => {
+    // console.log(response)
+        $('#search_movies').empty()
+        response.movies.forEach(element => {
+            $('#search_movies').append(`
+                <div class="movie-card">
+                    <div class="movie-header">
+                        <img alt="picture unavailable" src=${element.poster_path} width="100%" height="100%">
+                    </div>
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="#" onclick="selectMovie(${element.id}, event)">
+                            <h3 class="movie-title">${element.title}</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                `)
+            });
+        })
+        .fail(err => {
+            console.log(err)
+        })
+}
+
+function deleteFavoriteMovie(id){
+
+    const access_token = localStorage.getItem('access_token')
+    // console.log(id)
+    $.ajax({
+        url: `${SERVER}/favorites/${id}`,
+        method: 'delete',
+        headers: {
+            access_token: access_token
+        }
+    })
+    .done(response => {
+        favourite()
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+function listComingSoon(){
+    $('#login_page').hide()
+    $('#landing_navbar').hide()
+    $('#register').hide()
+    $('#allMovies').hide()
+    $('#homepage_navbar').show()
+    $('#selectedMovie').hide()
+    $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#comingSoonMovie').show()
+
+    comingSoon()
+}
+
+
+function comingSoon(){
+
+    const access_token = localStorage.getItem('access_token')
+
+    $.ajax({
+        method: 'GET',
+        url: `${SERVER}/movie/coming-soon`,
+        headers: {
+            access_token: access_token
+        }
+    })
+    .done(response => { 
+        $('#coming_soon_movies').empty() 
+        console.log(response)
+        response.comingSoon.forEach(element => {
+            $('#coming_soon_movies').append(`
+                <div class="movie-card">
+                  <div class="movie-header">
+                    <img src=${element.poster_path} width="100%" height="100%">
+                  </div>
+                  <div class="movie-content">
+                    <div class="movie-content-header">
+                        <h3 class="movie-title">${element.title}</h3><br>
+                        <h3 class="movie-released-date">Released on ${element.release_dates}</h3>
+                        <a href="${element.trailer}">Watch Trailer</a>
+                    </div>
+                  </div>
+                </div>
+            `)
+        });
+    })
+    .fail(err => {
+        console.log(err)
+    })
+
 }
