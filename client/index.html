@@ -92,7 +92,7 @@
             <div class="collapse navbar-collapse" id="login">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#" onclick="">Favourite<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#" onclick="favourite()">Favourite<span class="sr-only">(current)</span></a>
                     </li>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -124,6 +124,21 @@
 
     <!-- selected movie -->
     <section class="container" id="selectedMovie">
+    </section>
+
+
+    <section class="container" id="favourites">
+        <h3>Favourite Movies</h3>
+        <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Movie Poster</th>
+                <th scope="col">Title</th>
+              </tr>
+            </thead>
+            <tbody id="favourite_movies">
+            </tbody>
+          </table>
     </section>
 
 
