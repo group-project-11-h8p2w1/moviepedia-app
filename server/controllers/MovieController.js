@@ -37,7 +37,7 @@ class MovieController {
       }
     })
     .then(result => {
-      console.log(result.data);
+      // console.log(ressult.data);
       const { id, title, release_date, overview, vote_average, genres, poster_path  } = result.data
       const movie = {
         id,

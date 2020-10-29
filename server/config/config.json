@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "bobbyseptianto",
-    "password": "postgres",
+    "username": "postgres",
+    "password": "ngantuk",
     "database": "moviepedia-app-db",
     "host": "localhost",
     "dialect": "postgres"
