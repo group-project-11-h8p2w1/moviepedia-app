@@ -1,6 +1,7 @@
 const { User } = require("../models/index");
 const { comparePassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const {OAuth2Client} = require('google-auth-library');
 
 class UserController {
 
@@ -43,6 +44,42 @@ class UserController {
     } catch (err) {
       next(err);
     }
+  }
+
+  static loginGoogle(req, res, next) {
+    // Verify Token
+    // Dapetin Token dari Client
+    let {google_access_token} = req.body;
+    const client = new OAuth2Client(process.env.CLIENT_ID);
+    let email = '';
+    // Verify Google Token Berdasarkan Client ID
+    client.verifyIdToken({
+      idToken: google_access_token,
+      audience: process.env.CLIENT_ID,
+    })
+    .then((ticket) => {
+      let payload = ticket.getPayload();
+      email = payload.email;
+      return User.findOne({where: {email: payload.email}});
+    })
+    .then((user) => {
+      if (user) {
+        return user;
+      } else {
+        var userObj = {
+          email,
+          password: 'random'
+        }
+        return User.create(userObj);
+      }
+    })
+    .then((dataUser) => {
+      let access_token = signToken({id: dataUser.id, email: dataUser.email});
+      return res.status(200).json({access_token});
+    })
+    .catch((err) => {
+      next(err);
+    });
   }
 
 }

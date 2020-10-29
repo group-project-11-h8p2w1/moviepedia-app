@@ -1,5 +1,51 @@
 const SERVER = 'http://localhost:3000'
 
+// Google Sign In
+function onSignIn(googleUser) {
+  var google_access_token = googleUser.getAuthResponse().id_token;
+  console.log(google_access_token);
+
+  $.ajax({
+    method: 'POST',
+    url: "http://localhost:3000/loginGoogle",
+    data: {
+      google_access_token
+    }
+  })
+  .done(response => {
+    console.log(response);
+    let access_token = response.access_token
+    localStorage.setItem('access_token', access_token)
+    $('#allMovies').show()
+    $('#content_navbar').show()
+    $('#login_page').hide()
+    $('#landing_navbar').hide()
+
+    //ngosongin isi form after login
+    $('#email_login').val('')
+    $('#password_login').val('')
+
+    viewMovies()
+  })
+  .fail(err => {
+    console.log(err);
+  })
+}
+
+function logout() { // Logout untuk Semua!
+  $('#login_page').show()
+  $('#landing_navbar').show()
+  $('#register').hide()
+  $('#allMovies').hide()
+  $('#homepage_navbar').hide()
+  localStorage.clear();
+
+  // Google Signout di Taruh disini!
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
 
 $(document).ready(function(){
     const access_token = localStorage.getItem('access_token')
@@ -212,3 +258,4 @@ function viewFavourites(){
     })
 }
 
+}
