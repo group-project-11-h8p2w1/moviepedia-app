@@ -125,6 +125,35 @@ class MovieController {
       next(err)
     })
   }
+
+  static getTeather(req, res, next){
+    axios({
+      url: `https://api-gate2.movieglu.com/filmsComingSoon/?n=10`,
+      method: 'get',
+      headers: {
+        client : "PERS_76",
+        "x-api-key" : "WJDDBApmVK4SEZMbDLZvc14opN1tTSuc7gwC3DP3",
+        authorization : "Basic UEVSU183Njo3cmd5amhraWlFRUk=",
+        territory : "DE",
+        "api-version" : "v200",
+        geolocation : "52.47;-1.93",
+        "device-datetime" : "2018-09-14T08:30:17.360Z",
+      }
+    })
+    .then(movies => {
+      let listMovie = movies.data.results.map(el =>{
+        return {
+          id: el.id,
+          title: el.title,
+          poster_path: 'https://image.tmdb.org/t/p/w342/' + el.poster_path
+        }
+      })
+      res.status(200).json({ movies: listMovie })
+    })
+    .catch(err => {
+      next(err)
+    })
+  }
 }
 
 module.exports = MovieController

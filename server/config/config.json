@@ -1,13 +1,13 @@
 {
   "development": {
     "username": "postgres",
-    "password": "ngantuk",
+    "password": "postgres",
     "database": "moviepedia-app-db",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "bobbyseptianto",
+    "username": "postgres",
     "password": "postgres",
     "database": "moviepedia-app-db",
     "host": "localhost",
