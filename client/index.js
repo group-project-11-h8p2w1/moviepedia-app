@@ -257,5 +257,3 @@ function viewFavourites(){
         console.log(err)
     })
 }
-
-}
