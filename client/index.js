@@ -33,11 +33,7 @@ function onSignIn(googleUser) {
 }
 
 function logout() { // Logout untuk Semua!
-  $('#login_page').show()
-  $('#landing_navbar').show()
-  $('#register').hide()
-  $('#allMovies').hide()
-  $('#homepage_navbar').hide()
+  loginPage()
   localStorage.clear();
 
   // Google Signout di Taruh disini!
@@ -155,15 +151,32 @@ function viewMovies(){
     })
     .done(response => { 
         // console.log(response)
+        $('#news').empty() 
+        $('#news').append(`
+        <h4>${response.news.title}</h4>
+            <p>
+                <br>
+                Desc : ${response.news.description}<br><br>
+                Author: ${response.news.author}<br><br>
+                Source: ${response.news.source}<br><br>
+            <p>
+        `)
+        $('#movies').empty() 
         response.movies.forEach(element => {
-            $('#movies').append(
-                `
-                <tr>
-                    <th scope="row"><img src=${element.poster_path} width="40%" height="40%" onclick="selectMovie(${element.id}, event)"></th>
-                    <td>${element.title}</td>
-                </tr>
-                `
-            ) 
+            $('#movies').append(`
+                <div class="movie-card">
+                  <div class="movie-header">
+                    <img src=${element.poster_path} width="100%" height="100%">
+                  </div>
+                  <div class="movie-content">
+                    <div class="movie-content-header">
+                      <a href="#" onclick="selectMovie(${element.id}, event)">
+                        <h3 class="movie-title">${element.title}</h3>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            `)
         });
     })
     .fail(err => {
@@ -202,11 +215,13 @@ function oneMovie(id,e) {
             <h4>${response.title}</h4>
             <img src="${response.poster_path}">
             <p>
+                <br>
                 Overview : ${response.overview}<br><br>
-                Release Date:${response.release_date[0].name},${response.release_date[1].name}<br><br>
-                Genre: ${response.genres}<br><br>
+                Release Date: ${response.release_date}<br><br>
+                Genre: ${response.genres[0].name}<br><br>
                 Rating: ${response.rating}<br><br>
             <p>
+            <button id="button-fav" class="btn btn-outline-success my-2 my-sm-0" onclick="addFavorite(${response.id}, '${response.title}', '${response.poster_path}', event)">Add to Favorites</button>
             `
         )
     })
@@ -214,6 +229,29 @@ function oneMovie(id,e) {
         console.log(err)
     })
 
+}
+
+function addFavorite(id, title, poster, e) {
+  const access_token = localStorage.getItem('access_token')
+
+  $.ajax({
+    method: 'POST',
+    url: `${SERVER}/favorites`,
+    headers: {
+        access_token: access_token
+    },
+    data: {
+      MovieId: id,
+      title: title,
+      poster_path: poster
+    }
+  })
+  .done(response => {
+    favourite();
+  })
+  .fail(err => {
+    console.log(err);
+  })
 }
 
 
@@ -242,18 +280,45 @@ function viewFavourites(){
     })
     .done(response => { 
         // console.log(response)
-        response.movies.forEach(element => {
-            $('#favourite_movies').append(
-                `
-                <tr>
-                    <th scope="row"><img src=${element.poster_path} width="40%" height="40%" onclick="selectMovie(${element.id}, event)"></th>
-                    <td>${element.title}</td>
-                </tr>
-                `
-            ) 
+        response.forEach(element => {
+          $('#fav-movies').append(`
+          <div class="movie-card">
+            <div class="movie-header">
+              <img src=${element.poster_path} width="100%" height="100%">
+            </div>
+            <div class="movie-content">
+              <div class="movie-content-header">
+                <a href="#" onclick="selectMovie(${element.id}, event)">
+                  <h3 class="movie-title">${element.title}</h3>
+                </a>
+              </div>
+            </div>
+          </div>
+        `)
         });
     })
     .fail(err => {
         console.log(err)
     })
+}
+
+function search(e) {
+  const access_token = localStorage.getItem('access_token')
+
+  e.preventDefault()
+    const search_index = $('#search-index').val()
+    
+  $.ajax({
+      method: 'GET',
+      url: `${SERVER}/movie/search?query=${search_index}`,
+      headers: {
+          access_token: access_token
+      }
+  })
+  .done(response => {
+    console.log(response)
+})
+.fail(err => {
+    console.log(err)
+})
 }

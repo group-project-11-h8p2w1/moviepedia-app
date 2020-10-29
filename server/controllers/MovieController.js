@@ -5,39 +5,39 @@ class MovieController {
     let listMovie
     let listComingSoon
     let selectedMovie = []
-    axios({
-      url: `https://api-gate2.movieglu.com/filmsComingSoon/?n=5`,
-      method: 'get',
-      headers: {
-        client : "PERS_76",
-        "x-api-key" : "WJDDBApmVK4SEZMbDLZvc14opN1tTSuc7gwC3DP3",
-        authorization : "Basic UEVSU183Njo3cmd5amhraWlFRUk=",
-        territory : "DE",
-        "api-version" : "v200",
-        geolocation : "52.47;-1.93",
-        "device-datetime" : "2018-09-14T08:30:17.360Z",
-      }
-    })
-    .then(result => {
-      let coming = result.data.films
-      listComingSoon = coming
-      listComingSoon = coming.map(el => {
-        return {
-          title: el.film_name,
-          poster_path: el.images.poster['1'].medium.film_image,
-          trailer: el.film_trailer,
-          release_dates: el.release_dates[0].release_date
-        }
-      })
+    // axios({
+    //   url: `https://api-gate2.movieglu.com/filmsComingSoon/?n=5`,
+    //   method: 'get',
+    //   headers: {
+    //     client : "MOVI_89",
+    //     "x-api-key" : "mVBCAUfc8X8Q8Vwhc98pl5FLzOxhZHas82A4Et7M",
+    //     authorization : "Basic TU9WSV84OTo0RVJWdFNYeENjRlU=",
+    //     territory : "US",
+    //     "api-version" : "v200",
+    //     geolocation : "52.47;-1.93",
+    //     "device-datetime" : "2018-09-14T08:30:17.360Z",
+    //   }
+    // })
+    // .then(result => {
+    //   let coming = result.data.films
+    //   listComingSoon = coming
+    //   listComingSoon = coming.map(el => {
+    //     return {
+    //       title: el.film_name,
+    //       poster_path: el.images.poster['1'].medium.film_image,
+    //       trailer: el.film_trailer,
+    //       release_dates: el.release_dates[0].release_date
+    //     }
+    //   })
 
-      return axios({
+      axios({
         url: 'https://api.themoviedb.org/3/movie/popular',
         method: 'get',
         params: {
           api_key: 'c795d2b4445cff38a8b9b3b782b69b77'
         }
       })
-    })
+    // })
     .then(movies => {
       listMovie = movies.data.results.map(el =>{
         return {
