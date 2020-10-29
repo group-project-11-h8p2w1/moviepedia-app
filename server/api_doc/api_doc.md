@@ -38,15 +38,12 @@
  
 * **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ msg : "Email is required!, Wrong email format!, Password length minimum 6 characters!" }`
-
-  OR
-
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ msg : "Internal server error!" }`
 
-&nbsp;
+
+------------------------------------------------------------------------------------
+
 
 **Login User**
 ----
@@ -95,9 +92,11 @@
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ msg : "Internal server error!" }`
 
+------------------------------------------------------------------------------------
+
 **Add Favorite**
 ----
-  Add favorite.
+  Add favorite Movie.
 
 * **URL**
 
@@ -119,13 +118,6 @@
    
   None
 
-* **Data Params**
-
-   **Required:**
-
-   `email=[string]`
-   `password=[string]`
-
 * **Success Response:**
 
   * **Code:** 200 OK <br />
@@ -146,96 +138,213 @@
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ msg : "Internal server error!" }`
 
-    ### GET /movie
+------------------------------------------------------------------------------------
 
-> Get all todos
+* **GET Movies**
 
-_Request Header_
+> see all the movies 
+
+* **URL**
+
+  /movie
+
+* **Method:**
+  
+  `GET`
+
+* **_Request Header_**
 ```
 {
   "accesstoken": "<your access token>"
 }
 ```
 
-_Request Body_
+* **_Request Body_**
 ```
 not needed
 ```
 
-_Response (200)_
+* **_Response (200)_**
 ```
-[
-  {
-    "id": 2,
-    "title": "bermain game",
-    "description": "mobile lejen",
-    "status": "undone",
-    "due_date": "2020-10-29T00:00:00.000Z",
-    "userId": 4,
-    "createdAt": "2020-10-27T04:25:39.378Z",
-    "updatedAt": "2020-10-27T09:43:19.354Z"
-  },
-  {
-    "id": 6,
-    "title": "menanam ubi",
-    "description": "di halaman belakang",
-    "status": "undone",
-    "due_date": "2020-12-03T00:00:00.000Z",
-    "userId": 4,
-    "createdAt": "2020-10-27T07:42:54.553Z",
-    "updatedAt": "2020-10-27T09:43:36.773Z"
-  }
-]
+{
+    "news": {
+        "source": "New York Times",
+        "author": "Jason Bailey",
+        "title": "Stream These Ultra-Cool Heist Movies",
+        "description": "It’s hard to resist the charm of the smooth criminals, confident con artists and bold bank robbers of the caper movie. Enjoy some of the coolest thieves in film."
+    },
+    "movies": [
+        {
+            "id": 724989,
+            "title": "Hard Kill",
+            "poster_path": "https://image.tmdb.org/t/p/w342//ugZW8ocsrfgI95pnQ7wrmKDxIe.jpg"
+        },
+    ]
+}
 ```
 
-_Response (500 - Internal server error)_
+* **_Response (500 - Internal server error)_**
 ```
 {
   "errors": "internal server error"
 }
 ```
----
-### GET /movie:id
+------------------------------------------------------------------------------------
 
-> Get a specific todo by id
+* **GET Movie by id**
 
-_Request Header_
+> Get a specific Movie by id
+
+* **URL**
+
+  /movie/:id
+
+* **Method:**
+  
+  `GET`
+
+* **_Request Header_**
 ```
 {
   "accesstoken": "<your access token>"
 }
 ```
 
-_Request Params_
+* **_Request Params_**
 ```
 {
   "id": "<your id>"
 }
 ```
 
-_Response (200)_
+* **_Response (200)_**
 ```
+
 {
-  "id": 2,
-  "title": "bermain game",
-  "description": "mobile lejen",
-  "status": "undone",
-  "due_date": "2020-10-29T00:00:00.000Z",
-  "userId": 4,
-  "createdAt": "2020-10-27T04:25:39.378Z",
-  "updatedAt": "2020-10-27T09:43:19.354Z"
+    "id": 400160,
+    "title": "The SpongeBob Movie: Sponge on the Run",
+    "release_date": "2020-08-14",
+    "overview": "When his best friend Gary is suddenly snatched away, SpongeBob takes Patrick on a madcap mission far beyond Bikini Bottom to save their pink-shelled pal.",
+    "rating": 7,
+    "genres": [
+        {
+            "id": 14,
+            "name": "Fantasy"
+        },
+    ],
+    "poster_path": "https://image.tmdb.org/t/p/w342//gxK2lB1w8an5ViPXzisDsRsyHr0.jpg"
 }
 ```
 
-_Response (404 - Not Found)_
+* **_Response (404 - Not Found)_**
 ```
 {
-  "errors": "todo not found"
+  "errors": "Movie not found"
 }
 ```
-_Response (500 - Internal server error)_
+* **_Response (500 - Internal server error)_**
 ```
 {
   "errors": "internal server error"
 }
 ```
+
+------------------------------------------------------------------------------------
+
+**GET Search Movie**
+----
+  looking for the movie you are looking for.
+
+* **URL**
+
+  /movie/search
+
+* **Method:**
+  
+  `GET`
+
+* **Request Headers**
+
+  None
+  
+* **URL Params**
+   
+  None
+
+* **Success Response:**
+
+  * **Code:** 201 CREATED <br />
+    **Content:**
+    {
+    "movies": [
+        {
+            "id": 520763,
+            "title": "A Quiet Place Part II",
+            "poster_path": "https://image.tmdb.org/t/p/w342//4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg"
+        },
+        {
+            "id": 624963,
+            "title": "A Babysitter's Guide to Monster Hunting",
+            "poster_path": "https://image.tmdb.org/t/p/w342//bkld8Me0WiLWipLORRNfF1yIPHu.jpg"
+        },
+    ]
+}
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ msg : "Movie not Found" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ msg : "Internal server error!" }`
+
+------------------------------------------------------------------------------------
+
+
+**GET upcoming Movie**
+----
+> see all the movies to come
+
+* **URL**
+
+  /movie/comingSoon
+
+* **Method:**
+  
+  `GET`
+
+* **Request Headers**
+
+  None
+  
+* **URL Params**
+   
+  None
+
+* **Success Response:**
+
+  * **Code:** 201 CREATED <br />
+    **Content:**
+    {
+     "comingSoon": [
+        {
+            "title": "Greenland",
+            "poster_path": "https://image.movieglu.com/308403/DEU_308403h0.jpg",
+            "trailer": "https://trailer.movieglu.com/308403_high.mp4",
+            "release_dates": "2020-10-29"
+        },
+        {
+            "title": "Jim Button and the Wild 13 (Jim Knopf und die wilde 13)",
+            "poster_path": "https://image.movieglu.com/311895/DEU_311895h0.jpg",
+            "trailer": null,
+            "release_dates": "2020-10-01"
+        }
+    ]
+}
+ 
+* **Error Response:**
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ msg : "Internal server error!" }`
