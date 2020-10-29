@@ -6,13 +6,13 @@ $(document).ready(function(){
     if(access_token){
         viewMovies()
     }else {
-       loginPage()
+        loginPage()
     }
 })
 
 
 function loginPage(){
-    $('#login').show()
+    $('#login_page').show()
     $('#landing_navbar').show()
     $('#register').hide()
 }
@@ -36,7 +36,7 @@ function login(e) {
         localStorage.setItem('access_token', access_token)
         $('#').show()
         $('#content_navbar').show()
-        $('#login').hide()
+        $('#login_page').hide()
         $('#landing_navbar').hide()
 
         //ngosongin isi form after login
@@ -51,15 +51,15 @@ function login(e) {
 }
 
 
-
 function registerPage(){
-    $('#login').hide()
+    $('#login_page').hide()
     $('#landing_navbar').show()
     $('#register').show()
 }
 
 
 function register(e){
+
     e.preventDefault()
     const email = $('#email_register').val()
     const password = $('#password_register').val()
