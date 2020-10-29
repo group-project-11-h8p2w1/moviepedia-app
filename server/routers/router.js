@@ -13,7 +13,8 @@ router.post('/login', UserController.login);
 // AUTH
 router.use(authentication);
 router.use('/movie', movieRouter);
-router.post("/favorites", authorization, FavoriteController.addFavMovie);
-router.get("/favorites", authorization, FavoriteController.showFavMovie);
+router.post("/favorites", FavoriteController.addFavMovie);
+router.get("/favorites", FavoriteController.showFavMovie);
+router.delete("/favorites/:id", authorization, FavoriteController.deleteFavMovie);
 
 module.exports = router;
