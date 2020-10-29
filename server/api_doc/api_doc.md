@@ -95,7 +95,58 @@
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ msg : "Internal server error!" }`
 
-    ### GET /todos
+**Add Favorite**
+----
+  Add favorite.
+
+* **URL**
+
+  /favorites
+
+* **Method:**
+  
+  `POST`
+
+* **Request Headers**
+
+     ```
+    {
+      "access_token": "<your access token>"
+    }
+    ```
+  
+* **URL Params**
+   
+  None
+
+* **Data Params**
+
+   **Required:**
+
+   `email=[string]`
+   `password=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 OK <br />
+    **Content:**
+    ```
+    {
+      "access_token": "<your access token>"
+    }
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ msg : "Invalid email or password!" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ msg : "Internal server error!" }`
+
+    ### GET /movie
 
 > Get all todos
 
