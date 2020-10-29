@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router() ;
 const UserController = require('../controllers/UserController');
+const FavoriteController = require('../controllers/FavoriteController');
 
 const authentication = require("../middlewares/authentication");
 const authorization = require("../middlewares/authorization");
@@ -10,6 +11,7 @@ router.post('/login', UserController.login);
 
 // AUTH
 router.use(authentication);
-router.use(authorization);
+router.post("/favorites", authorization, FavoriteController.addFavMovie);
+router.get("/favorites", authorization, FavoriteController.showFavMovie);
 
 module.exports = router;
