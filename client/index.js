@@ -113,7 +113,7 @@ function viewMovies(){
                     <td>${element.title}</td>
                 </tr>
                 `
-            )
+            ) 
         });
     })
     .fail(err => {
