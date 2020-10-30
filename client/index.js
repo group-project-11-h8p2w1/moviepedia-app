@@ -189,7 +189,7 @@ function viewMovies(){
                 </div>
             `)
         });
-    })
+    }) 
     .fail(err => {
         console.log(err)
     })
