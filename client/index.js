@@ -164,6 +164,7 @@ function viewMovies(){
         $('#news').empty() 
         $('#news').append(`
         <br>
+        <h5>Flash News</h5>
         <h4 class="font-weight-bold text-dark">${response.news.title}</h4>
             <p class="text-dark">
                 Desc : ${response.news.description}<br>
@@ -296,21 +297,22 @@ function viewFavourites(){
         // console.log(response)
         $('#fav-movies').empty()
         response.forEach(element => {
-          $('#fav-movies').append(`
-          <div class="movie-card">
-            <div class="movie-header">
-              <img src=${element.poster_path} width="100%" height="100%">
+            $('#fav-movies').append(`
+            <div class="movie-card">
+                <div class="movie-header">
+                    <img src=${element.poster_path} width="100%" height="100%">
+                </div>
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="#" onclick="selectMovie(${element.MovieId}, event)">
+                        <h3 class="movie-title">${element.title}</h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="removeFavorite">
+                    <button type="button" onclick="deleteFavoriteMovie(${element.id})" class="btn btn-danger">X</button>
+                </div>
             </div>
-            <div class="movie-content">
-              <div class="movie-content-header">
-                <a href="#" onclick="selectMovie(${element.MovieId}, event)">
-                  <h3 class="movie-title">${element.title}</h3>
-                </a>
-                
-              </div>
-              <button type="button" onclick="deleteFavoriteMovie(${element.id})" class="btn btn-danger fixed-top">X</button>
-            </div>
-          </div>
         `)
         });
     })
@@ -426,10 +428,12 @@ function comingSoon(){
                   <div class="movie-header">
                     <img src=${element.poster_path} width="100%" height="100%">
                   </div>
-                  <div class="movie-content">
+                    <div class="movie-content">
                     <div class="movie-content-header">
                         <h3 class="movie-title">${element.title}</h3><br>
-                        <h3 class="movie-released-date">Released on ${element.release_dates}</h3>
+                    </div>
+                    <div style="color: white; text-align: center; width: 100%">
+                        <p class="movie-released-date" style="display: inline">Released on ${element.release_dates}</p><br>
                         <a href="${element.trailer}">Watch Trailer</a>
                     </div>
                   </div>
