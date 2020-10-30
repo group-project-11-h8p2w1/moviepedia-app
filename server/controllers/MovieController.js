@@ -56,9 +56,9 @@ class MovieController {
       url: `https://api-gate2.movieglu.com/filmsComingSoon/?n=5`,
       method: 'get',
       headers: {
-        client : "MOVI_89",
-        "x-api-key" : "mVBCAUfc8X8Q8Vwhc98pl5FLzOxhZHas82A4Et7M",
-        authorization : "Basic TU9WSV84OTo0RVJWdFNYeENjRlU=",
+        client : "HACK_10",
+        "x-api-key" : "kQ83cuYOBDxDhBA47k2c8wOAvPg5ME04etFRlT09",
+        authorization : "Basic SEFDS18xMDpMcEttMVpTdjBpT0I=",
         territory : "US",
         "api-version" : "v200",
         geolocation : "52.47;-1.93",
