@@ -580,7 +580,7 @@ function trailer (url) {
     $('#comingSoonMovie').hide()
     $('#trailerComingSoon').show()
 
+    $('#trailer').html(`<iframe class="embed-responsive-item" src="${url}" allowfullscreen></iframe>`);
     
-    `<iframe class="embed-responsive-item" src="${url}" allowfullscreen></iframe>`
         
 }
