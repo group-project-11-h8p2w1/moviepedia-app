@@ -2,6 +2,7 @@ const SERVER = 'http://localhost:3000'
 
 // Google Sign In
 function onSignIn(googleUser) {
+    
   var google_access_token = googleUser.getAuthResponse().id_token;
   console.log(google_access_token);
 
@@ -9,7 +10,7 @@ function onSignIn(googleUser) {
     method: 'POST',
     url: "http://localhost:3000/loginGoogle",
     data: {
-      google_access_token
+        google_access_token
     }
   })
   .done(response => {
@@ -33,7 +34,9 @@ function onSignIn(googleUser) {
   })
 }
 
+
 function logout() { // Logout untuk Semua!
+
   loginPage()
   localStorage.clear();
 
@@ -44,7 +47,9 @@ function logout() { // Logout untuk Semua!
   });
 }
 
+
 $(document).ready(function(){
+
     const access_token = localStorage.getItem('access_token')
     if(access_token){
         viewMovies()
@@ -55,6 +60,7 @@ $(document).ready(function(){
 
 
 function loginPage(){
+
     $('#login_page').show()
     $('#landing_navbar').show()
     $('#register').hide()
@@ -64,6 +70,7 @@ function loginPage(){
     $('#searchMovies').hide()
     $('#selectedMovie').hide()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
 }
 
 function login(e) {
@@ -84,7 +91,7 @@ function login(e) {
         let access_token = response.access_token
         localStorage.setItem('access_token', access_token)
         $('#allMovies').show()
-        // $('#content_navbar').show()
+        $('#homepage_navbar').show()
         $('#login_page').hide()
         $('#landing_navbar').hide()
 
@@ -101,6 +108,7 @@ function login(e) {
 
 
 function registerPage(){
+
     $('#login_page').hide()
     $('#landing_navbar').show()
     $('#register').show()
@@ -110,6 +118,7 @@ function registerPage(){
     $('#searchMovies').hide()
     $('#selectedMovie').hide()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
 }
 
 
@@ -146,9 +155,12 @@ function movies() {
     $('#searchMovies').hide()
     $('#selectedMovie').hide()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
+  
 }
 
 function viewMovies(){
+
     movies()
     const access_token = localStorage.getItem('access_token')
     
@@ -160,18 +172,19 @@ function viewMovies(){
         }
     })
     .done(response => { 
-        // console.log(response)
+        
         $('#news').empty() 
         $('#news').append(`
         <br>
         <h5>Flash News</h5>
-        <h4 class="font-weight-bold text-dark">${response.news.title}</h4>
+        <h4 class="font-weight-bold" style="color: black">${response.news.title}</h4>
             <p class="text-dark">
                 Desc : ${response.news.description}<br>
                 Author: ${response.news.author}<br>
                 Source: ${response.news.source}<br><br>
             <p>
         `)
+
         $('#movies').empty() 
         response.movies.forEach(element => {
             $('#movies').append(`
@@ -197,6 +210,7 @@ function viewMovies(){
 
 
 function selectMovie(id,e){
+
     e.preventDefault()
     oneMovie(id,e)
 
@@ -209,9 +223,11 @@ function selectMovie(id,e){
     $('#favourites').hide()
     $('#searchMovies').hide()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
 }
 
 function oneMovie(id,e) {
+
     const access_token = localStorage.getItem('access_token')
 
     $.ajax({
@@ -245,6 +261,7 @@ function oneMovie(id,e) {
 }
 
 function addFavorite(id, title, poster, e) {
+
   const access_token = localStorage.getItem('access_token')
 
   $.ajax({
@@ -269,6 +286,7 @@ function addFavorite(id, title, poster, e) {
 
 
 function favourite(){
+
     $('#login_page').hide()
     $('#landing_navbar').hide()
     $('#register').hide()
@@ -278,6 +296,7 @@ function favourite(){
     $('#favourites').show()
     $('#searchMovies').hide()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
 
     viewFavourites()
 }
@@ -322,6 +341,7 @@ function viewFavourites(){
 }
 
 function viewSearch (){
+
     $('#login_page').hide()
     $('#landing_navbar').hide()
     $('#register').hide()
@@ -331,14 +351,13 @@ function viewSearch (){
     $('#favourites').hide()
     $('#searchMovies').show()
     $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').hide()
 }
 
 function search(e) {
 
     viewSearch()
-
     const access_token = localStorage.getItem('access_token')
-    
     e.preventDefault()
     const search_index = $('#search-index').val()
     
@@ -350,7 +369,6 @@ function search(e) {
         }
     })
     .done(response => {
-    // console.log(response)
         $('#search_movies').empty()
         response.movies.forEach(element => {
             $('#search_movies').append(`
@@ -377,7 +395,6 @@ function search(e) {
 function deleteFavoriteMovie(id){
 
     const access_token = localStorage.getItem('access_token')
-    // console.log(id)
     $.ajax({
         url: `${SERVER}/favorites/${id}`,
         method: 'delete',
@@ -394,6 +411,7 @@ function deleteFavoriteMovie(id){
 }
 
 function listComingSoon(){
+
     $('#login_page').hide()
     $('#landing_navbar').hide()
     $('#register').hide()
@@ -403,6 +421,7 @@ function listComingSoon(){
     $('#favourites').hide()
     $('#searchMovies').hide()
     $('#comingSoonMovie').show()
+    $('#trailerComingSoon').hide()
 
     comingSoon()
 }
@@ -434,7 +453,7 @@ function comingSoon(){
                     </div>
                     <div style="color: white; text-align: center; width: 100%">
                         <p class="movie-released-date" style="display: inline">Released on ${element.release_dates}</p><br>
-                        <a href="${element.trailer}">Watch Trailer</a>
+                        <a href="#" onclick="trailer('${element.trailer}')">Watch Trailer</a>
                     </div>
                   </div>
                 </div>
@@ -444,5 +463,22 @@ function comingSoon(){
     .fail(err => {
         console.log(err)
     })
-
 }
+
+function trailer (url) {
+    $('#login_page').hide()
+    $('#landing_navbar').hide()
+    $('#register').hide()
+    $('#allMovies').hide()
+    $('#homepage_navbar').show()
+    $('#selectedMovie').hide()
+    $('#favourites').hide()
+    $('#searchMovies').hide()
+    $('#comingSoonMovie').hide()
+    $('#trailerComingSoon').show()
+
+    
+    `<iframe class="embed-responsive-item" src="${url}" allowfullscreen></iframe>`
+        
+}
+
