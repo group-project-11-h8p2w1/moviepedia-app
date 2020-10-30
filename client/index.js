@@ -163,11 +163,11 @@ function viewMovies(){
         // console.log(response)
         $('#news').empty() 
         $('#news').append(`
-        <h4>${response.news.title}</h4>
-            <p>
-                <br>
-                Desc : ${response.news.description}<br><br>
-                Author: ${response.news.author}<br><br>
+        <br>
+        <h4 class="font-weight-bold text-dark">${response.news.title}</h4>
+            <p class="text-dark">
+                Desc : ${response.news.description}<br>
+                Author: ${response.news.author}<br>
                 Source: ${response.news.source}<br><br>
             <p>
         `)
