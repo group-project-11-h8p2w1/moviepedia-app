@@ -308,9 +308,9 @@ function viewFavourites(){
                         <h3 class="movie-title">${element.title}</h3>
                         </a>
                     </div>
-                </div>
-                <div class="removeFavorite">
+                    <div class="removeFavorite">
                     <button type="button" onclick="deleteFavoriteMovie(${element.id})" class="btn btn-danger">X</button>
+                    </div>
                 </div>
             </div>
         `)
