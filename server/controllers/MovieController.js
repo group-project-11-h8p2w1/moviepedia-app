@@ -39,9 +39,8 @@ class MovieController {
         title: selectedNews.title,
         description: selectedNews.description
       }
-      
-      for (let i = 0; i < 10; i++) {
-        selectedMovie.push(listMovie[Math.floor(Math.random() * listMovie.length)])
+      for (let i = 0; i < 12; i++) {
+        selectedMovie.push(listMovie[i])
       }
       res.status(200).json({news: filteredNews, movies: selectedMovie})
     })
