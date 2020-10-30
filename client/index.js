@@ -40,6 +40,11 @@ function onSignIn(googleUser) {
     $('#email_login').val('')
     $('#password_login').val('')
 
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully'
+    })
+
     viewMovies()
   })
   .fail(err => {
@@ -277,7 +282,6 @@ function oneMovie(id,e) {
         }
     })
     .done(response => {
-        console.log(response)
         $('#selectedMovie').html(
             `
             <h4>${response.title}</h4>
@@ -426,6 +430,32 @@ function search(e) {
     })
     .done(response => {
         $('#search_movies').empty()
+        
+        // Searching Timer
+        let timerInterval
+        Swal.fire({
+          title: 'Searching!',
+          html: 'Result will be shown in <b></b> milliseconds.',
+          timer: 1500,
+          timerProgressBar: true,
+          willOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent()
+              if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                  b.textContent = Swal.getTimerLeft()
+                }
+              }
+            }, 100)
+          },
+          onClose: () => {
+            clearInterval(timerInterval)
+          }
+        })
+        // End Searching Timer
+
         response.movies.forEach(element => {
             $('#search_movies').append(`
                 <div class="movie-card">
@@ -511,7 +541,7 @@ function comingSoon(){
         $('#coming_soon_movies').empty() 
         console.log(response)
         response.comingSoon.forEach(element => {
-            $('#coming_soon_movies').append(`
+            $('#coming_soon_movies').html(`
                 <div class="movie-card">
                   <div class="movie-header">
                     <img src=${element.poster_path} width="100%" height="100%">
@@ -530,7 +560,11 @@ function comingSoon(){
         });
     })
     .fail(err => {
-        console.log(err)
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     })
 }
 
