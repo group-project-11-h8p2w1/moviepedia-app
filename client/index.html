@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Client ID Meta -->
     <meta name="google-signin-client_id" content="1066799176404-vu94bkh7anjmkbnb6b58hgha6gcmi7im.apps.googleusercontent.com">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
     <link rel="stylesheet" 
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
@@ -16,6 +20,7 @@
     integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
     crossorigin="anonymous"
     />
+
     <link rel="stylesheet" href="style.css">
     <title>IndoEssexOne</title>
 </head>
@@ -24,7 +29,9 @@
     <!-- landing navbar -->
     <section id="landing_navbar"> 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
             <a class="navbar-brand" href="#"><i class="fas fa-film"></i> IndoEssexOne</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,8 +49,7 @@
     </section>
 
 
-
-    <!-- login form idnya landing -->
+    <!-- login form -->
     <section class="container" id="login_page">
         <div class="row justify-content-center mt-5">
             <div class="col-4" style="background: #353A40; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: 430px; margin: 1rem auto 8.1rem auto; width: 329px;">
@@ -68,7 +74,7 @@
     </section>
 
 
-    <!-- register form idnya register -->
+    <!-- register form -->
     <section class="container" id="register">
         <div class="row justify-content-center mt-5">
             <div class="col-4"style="background: #353A40; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: 410px; margin: 3rem auto 8.1rem auto; width: 329px;">
@@ -90,7 +96,7 @@
     </section>
   
 
-    <!-- landing navbar -->
+    <!-- homepage navbar -->
     <section id="homepage_navbar"> 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#" onclick="movies()"><i class="fas fa-film"></i> IndoEssexOne</a>
@@ -118,37 +124,34 @@
         </nav>
     </section>
 
-
     <!-- view all movies -->
     <section id="allMovies">
-        <!-- NEWS -->
         <div class="container" id="news" style="background: #bdbdbd; opacity: 0.5; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: fit-content; width: auto; margin: 1rem auto 2rem auto;">
-
-          <!-- APPEND -->
         </div>
         <h3 class="text-center text-dark font-weight-bold">Popular Movies</h3>
           <div id="movies" style="margin-left: 95px;">
-            <!-- APPEND -->
           </div>
     </section>
 
 
      <!-- view coming soon movies -->
      <section id="comingSoonMovie">
-        <!-- NEWS -->
         <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Coming Soon Movies</h3>
           <div id="coming_soon_movies" style="margin-left: 95px;">
-            <!-- APPEND -->
           </div>
+    </section>
+
+
+    <section id="trailerComingSoon">
+      <div class="embed-responsive embed-responsive-1by1" id="trailer">
+      </div>
     </section>
 
 
     <!-- view search movie -->
     <section id="searchMovies">
-
       <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Search Result Movies</h3>
         <div id="search_movies" style="margin-left: 95px;">
-          <!-- APPEND -->
         </div>
     </section>
 
@@ -161,7 +164,6 @@
     <section id="favourites" style="margin-left: 85px;">
         <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Favourite Movies</h3>
           <div id="fav-movies">
-            <!-- APPEND -->
           </div>
     </section>
 
