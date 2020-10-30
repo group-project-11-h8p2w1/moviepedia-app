@@ -1,5 +1,18 @@
 const SERVER = 'http://localhost:3000'
 
+// Login Alert
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 // Google Sign In
 function onSignIn(googleUser) {
     
@@ -30,13 +43,20 @@ function onSignIn(googleUser) {
     viewMovies()
   })
   .fail(err => {
-    console.log(err);
+    Swal.fire(
+      'Error!',
+      err.responseJSON.msg,
+      'ERROR'
+    )
   })
 }
 
 
 function logout() { // Logout untuk Semua!
-
+  Toast.fire({
+    icon: 'success',
+    title: 'Logout in successfully'
+  })
   loginPage()
   localStorage.clear();
 
@@ -98,11 +118,18 @@ function login(e) {
         //ngosongin isi form after login
         $('#email_login').val('')
         $('#password_login').val('')
-
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
         viewMovies()
     })
     .fail(err => {
-        loginPage()
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     }) 
 }
 
@@ -137,10 +164,18 @@ function register(e){
         }
     })
     .done(response => {
-        viewMovies()
+      Toast.fire({
+        icon: 'success',
+        title: 'Registered in successfully'
+      })
+      loginPage()
     })
     .fail(err => {
-        registerPage()
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     }) 
 }
 
@@ -204,7 +239,11 @@ function viewMovies(){
         });
     }) 
     .fail(err => {
-        console.log(err)
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     })
 }
 
@@ -255,7 +294,11 @@ function oneMovie(id,e) {
         )
     })
     .fail(err => {
-        console.log(err)
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     })
 
 }
@@ -277,10 +320,19 @@ function addFavorite(id, title, poster, e) {
     }
   })
   .done(response => {
+    Swal.fire(
+      'Added!',
+      'Your favorites has been added.',
+      'success'
+    )
     favourite();
   })
   .fail(err => {
-    console.log(err);
+    Swal.fire(
+      'Error!',
+      err.responseJSON.msg,
+      'ERROR'
+    )
   })
 }
 
@@ -327,16 +379,20 @@ function viewFavourites(){
                         <h3 class="movie-title">${element.title}</h3>
                         </a>
                     </div>
-                </div>
-                <div class="removeFavorite">
+                    <div class="removeFavorite">
                     <button type="button" onclick="deleteFavoriteMovie(${element.id})" class="btn btn-danger">X</button>
+                    </div>
                 </div>
             </div>
         `)
         });
     })
     .fail(err => {
-        console.log(err)
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     })
 }
 
@@ -388,7 +444,11 @@ function search(e) {
             });
         })
         .fail(err => {
-            console.log(err)
+          Swal.fire(
+            'Error!',
+            err.responseJSON.msg,
+            'ERROR'
+          )
         })
 }
 
@@ -403,10 +463,19 @@ function deleteFavoriteMovie(id){
         }
     })
     .done(response => {
+        Swal.fire(
+          'Remove!',
+          'Your favorite movie has been removed.',
+          'success'
+        )
         favourite()
     })
     .fail(err => {
-        console.log(err)
+      Swal.fire(
+        'Error!',
+        err.responseJSON.msg,
+        'ERROR'
+      )
     })
 }
 
