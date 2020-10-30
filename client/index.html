@@ -1,0 +1,182 @@
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Client ID Meta -->
+    <meta name="google-signin-client_id" content="1066799176404-vu94bkh7anjmkbnb6b58hgha6gcmi7im.apps.googleusercontent.com">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
+        crossorigin="anonymous"
+    />
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+    crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css">
+    <title>IndoEssexOne</title>
+</head>
+<body>
+
+    <!-- landing navbar -->
+    <section id="landing_navbar"> 
+
+        <nav class="navbar navbar-expand-lg" style="background-color: #EC9C2B;">
+
+            <a class="navbar-brand" href="#" style="color: white;"><i class="fas fa-film"></i> IndoEssexOne</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="login">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onclick="loginPage()" style="color: white;">Login<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="registerPage()" style="color: white;">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+
+    <!-- login form -->
+    <section class="container" id="login_page">
+        <div class="row justify-content-center mt-5">
+            <div class="col-4" style="background:  #EC9C2B; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: 430px; margin: 1rem auto 8.1rem auto; width: 329px;">
+                <form onsubmit="login(event)"><br><br>
+                    <h3 class="text-center text-light font-weight-bold">Log In</h3>
+                    <div class="form-group">
+                      <label for="email" class="text-light">Email</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" autocomplete="email">
+                      <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="text-light">Password</label>
+                      <input type="password" class="form-control" id="password" autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <!-- Button Google Login -->
+                <small class="form-text text-light" style="line-height: 30px;">Sign in with your google account</small>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- register form -->
+    <section class="container" id="register">
+        <div class="row justify-content-center mt-5">
+            <div class="col-4"style="background:  #EC9C2B; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: 410px; margin: 3rem auto 8.1rem auto; width: 329px;">
+                <form onsubmit="register(event)"><br><br><br>
+                    <h3 class="text-center text-light font-weight-bold">Create an Account</h3>
+                    <div class="form-group">
+
+                      <label for="email_register" class="text-light">Email</label>
+                      <input type="email" class="form-control" id="email_register" aria-describedby="emailHelp" autocomplete="email">
+                      <small id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</small>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="password_register" class="text-light">Password</label>
+                      <input type="password" class="form-control" id="password_register" autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create an account</button>
+                  </form>
+            </div>
+        </div>
+    </section>
+  
+
+    <!-- homepage navbar -->
+    <section id="homepage_navbar"> 
+
+        <nav class="navbar navbar-expand-lg" style="background-color:  #EC9C2B;">
+            <a class="navbar-brand" href="#" onclick="movies()" style="color: white;"><i class="fas fa-film"></i> IndoEssexOne</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="homepage">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onclick="movies()" style="color: white;">Popular Movies<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onclick="listComingSoon()" style="color: white;">Coming Soon<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" onclick="favourite()" style="color: white;">Favourite<span class="sr-only">(current)</span></a>
+                    </li>
+                    <form onsubmit="search(event)" class="form-inline my-2 my-lg-0">
+                        <input id="search-index" class="form-control mr-sm-2" name="search_query" type="search" placeholder="Search Movie" aria-label="Search">
+                        <button class="btn btn-sm btn-light" type="submit">Search</button>
+                    </form>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="logout();">Logout</button>
+        </nav>
+    </section>
+
+    <!-- view all movies -->
+    <section id="allMovies">
+        <div class="container" id="news" style="background: #B5C6B9; opacity: 0.5; border-radius: 8px; box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65); height: fit-content; width: auto; margin: 1rem auto 2rem auto;">
+        </div>
+        <h3 class="text-center text-dark font-weight-bold">Popular Movies</h3>
+          <div id="movies" style="margin-left: 95px;">
+          </div>
+    </section>
+
+
+     <!-- view coming soon movies -->
+     <section id="comingSoonMovie">
+        <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Coming Soon Movies</h3>
+          <div id="coming_soon_movies" style="margin-left: 95px;">
+          </div>
+    </section>
+
+
+    <section id="trailerComingSoon">
+      <div class="embed-responsive embed-responsive-1by1" id="trailer">
+      </div>
+    </section>
+
+
+    <!-- view search movie -->
+    <section id="searchMovies">
+      <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Search Result Movies</h3>
+        <div id="search_movies" style="margin-left: 95px;">
+        </div>
+    </section>
+
+
+    <!-- selected movie -->
+    <section class="container" id="selectedMovie">
+    </section>
+
+
+    <section id="favourites" style="margin-left: 85px;">
+        <h3 class="text-center text-dark font-weight-bold" style="margin-top: 40px;">Favourite Movies</h3>
+          <div id="fav-movies">
+          </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
