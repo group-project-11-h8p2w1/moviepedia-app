@@ -541,7 +541,7 @@ function comingSoon(){
         $('#coming_soon_movies').empty() 
         console.log(response)
         response.comingSoon.forEach(element => {
-            $('#coming_soon_movies').html(`
+            $('#coming_soon_movies').append(`
                 <div class="movie-card">
                   <div class="movie-header">
                     <img src=${element.poster_path} width="100%" height="100%">
