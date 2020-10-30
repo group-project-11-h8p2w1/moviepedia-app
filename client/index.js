@@ -284,14 +284,14 @@ function oneMovie(id,e) {
     .done(response => {
         $('#selectedMovie').html(
             `
-            <h4>${response.title}</h4>
+            <h4 class="font-weight-bold mt-5" style="color: black">${response.title}</h4>
             <img src="${response.poster_path}">
             <p>
                 <br>
-                Overview : ${response.overview}<br><br>
-                Release Date: ${response.release_date}<br><br>
-                Genre: ${response.genres[0].name}<br><br>
-                Rating: ${response.rating}<br><br>
+                Overview : ${response.overview}<br>
+                Release Date: ${response.release_date}<br>
+                Genre: ${response.genres[0].name}<br>
+                Rating: ${response.rating}<br>
             <p>
             <button id="button-fav" class="btn btn-outline-success my-2 my-sm-0" onclick="addFavorite(${response.id}, '${response.title}', '${response.poster_path}', event)">Add to Favorites</button>
             `
@@ -584,4 +584,3 @@ function trailer (url) {
     `<iframe class="embed-responsive-item" src="${url}" allowfullscreen></iframe>`
         
 }
-
